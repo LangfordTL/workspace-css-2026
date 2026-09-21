@@ -1,0 +1,26 @@
+/*style file for index.html
+1 --- global variable
+2 --- layout
+*/
+
+/* 1 ---- Global variable ----*/
+:root{
+    --color-body: #f5fe66;
+    --color-background-section: #hsl(260, 70%, 30%);
+    --color-font-body: rgb(7, 63, 168);
+}
+
+body{
+    background-color: var(--color-background-section);
+    color:var(--color-font-body);
+}
+
+p{
+    background-color: var(--color-background-section);
+    color: var(--color-font-body);
+}
+
+/**/
+h3{
+    color: var(--color-background-section);
+}
