@@ -85,8 +85,8 @@ header abbr{
 
 article{
     position: absolute;
-    top: var(--pos-top);
-    left: var(--pos-left);
+     top: var(--pos-top);
+     left: var(--pos-left);
     /* rotate at a different angle using variables*/
     transform: (var(--tilt, 30deg));
     background-image: var(--img-cardback);
