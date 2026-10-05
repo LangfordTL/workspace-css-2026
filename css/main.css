@@ -1,17 +1,32 @@
 /*style file for index.html
-1 --- global variable
-2 --- layout
+1 --- Global Variable
+2 --- Layout
 */
 
 /* 1 ---- Global variable ----*/
 :root{
     --color-body: #f5fe66;
-    --color-background-section: #hsl(260, 70%, 30%);
-    --color-font-body: rgb(7, 63, 168);
+    --color-background-gradient: linear-gradient(to top, #0c2cb7, #eceef4);
+    --color-background-section: hsl(222, 90%, 48%);
+    --color-font-body: rgb(0, 86, 245);
+    --color-board-frame: hsl(6, 57%, 23%);
+    --color-top-bar:hsl(300, 96%, 33%);
+    --img-board: url('../img/water.webp');
+    --img-cardback: url('../img/BACK.png');
+    --img-cardfront1: url('../img/Normal_bg.webp');
+    --img-cardfront2: url('../img/Pasisve_bg.webp');
+    --tilt-rotate: 30deg
+}
+
+#zen-explanation{--pos-top: 170px; --pos-left:380px; --front-color: rgb(110, 16, 3);}
+#zen-participation{--pos-top: 180px; --pos-left:50px; --front-color: rgb(157, 233, 178);}
+#zen-summary,#zen-preamble, #zen-benefits, #zen-requirements, #zen-intro, #design-archives, #zen-resources, #design-selection{
+    display: none;
 }
 
 body{
     background-color: var(--color-background-section);
+    height: 100vh;
     color:var(--color-font-body);
 }
 
@@ -24,3 +39,212 @@ p{
 h3{
     color: var(--color-background-section);
 }
+
+/* 2 --- Layout ---*/
+
+.page-wrapper{
+    background-image: var(--img-board);
+    position: fixed;
+    /* Adjust left, top, width, height, make the board in the midle*/
+    left: 8%;
+    width: 80%;
+    height: 90vh;
+    /* Require get board frame */
+    border: 10px solid var(--color-board-frame);
+    border-radius: 30px;
+    transform-origin: bottom center;
+    transform: perspective(400px) rotateX(10deg) translate(20px, 10px) scale(1);
+    transform-style: preserve-3d;
+    animation: pictureAnimation 10s infinite;
+}
+
+.page-wrapper:hover {
+
+}
+
+.extra1{
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    width: 800px;
+    height: 20px;
+    background-color: brown;
+}
+
+
+/* relative position */
+header abbr{
+    position: relative;
+    top: 10px;
+    font-size: 0.5em;
+}
+
+.intro, .supporting{
+    display: contents;
+}
+
+article{
+    position: absolute;
+    top: var(--pos-top);
+    left: var(--pos-left);
+    /* rotate at a different angle using variables*/
+    transform: (var(--tilt, 30deg));
+    background-image: var(--img-cardback);
+    width: 145px;
+    height: 25vh;
+    overflow: scroll;
+    /* Element Model */
+    padding: 5px 10px 20px 5px;
+    border: 2px dotted white;
+    border-radius: 30px;
+    box-shadow: -25px -25px 50px black;
+    transition: all 3s;
+}
+
+article:active{
+    background-image: var(--img-cardfront2);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 25vh;
+    transform-origin: 250px 40vh;
+    transform: rotateX(-30deg);
+}
+
+/* Everything inside of block*/
+article > *{
+    opacity: 0;
+    transition: opacity 3s;
+}
+
+article:active > *{
+    opacity: 1;
+}
+
+/* hide the element */
+aside{
+    display:none;
+}
+
+/* Required Web font, add some text decoration */
+header h1{
+    .playwrite-cu-guides-regular {
+  font-family: "Playwrite CU Guides", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2em;
+}
+
+}
+
+@font-face {
+    font-family: 'LangfordFont';
+    src: url('../fonts/chunkfive.woff') format('woff'), 
+    url('../fonts/chunkfive.svg')format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+
+header h2 {
+    font-family: 'LangfordFont', Arial, Helvetica, sans-serif;
+}
+
+h2 {
+    text-transform: capitalize;
+    text-align: center;
+}
+
+/* Display and visibility and sibling selector*/
+/* all paragraph which are siblings of h3 will have text-transform uppercase*/
+h3+p{
+    visibility: hidden;
+    text-transform: capitalize;
+}
+
+p{
+    opacity: 100;
+}
+
+/* more practice on selectors */
+article h3::first-letter{
+    font-size: 3em;
+}
+article p:first-child{
+    text-shadow: 0.5em 0.1em;
+}
+
+p:nth-child(2n){
+    background-color: #2b0071;
+    box-shadow: -25px -25px 50px black;
+}
+
+aside ul{
+    list-style-image: url();
+}
+
+footer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex; /* make it horizontal*/
+    gap: 8px;
+    padding: 10px;
+    animation: horizontalmove 5s linear infinite;
+}
+
+footer a{
+    background-color: var(--color-top-bar);
+    text-decoration: none;
+}
+
+@keyframes horizontalmove{
+    0%{transform: translateX(0);}
+    50%{transform: translateX(100);}
+    100%{transform: translateX(0);}
+}
+
+/* CSS3 Grid code answer {
+  box-sizing: border-box;
+}
+.wrapper {
+  max-width: 940px;
+  margin: 0 auto;
+}
+.wrapper > div {
+  border: 2px solid rgb(233 171 88);
+  border-radius: 5px;
+  background-color: rgb(233 171 88 / 50%);
+  padding: 1em;
+  color: #d9480f;
+}
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
+}
+.one {
+  grid-column: 2 / 4;
+  grid-row: 2/5;
+}
+.two {
+  grid-column: 1 / 4;
+  grid-row: 1 / 2;
+}
+.three {
+  grid-column: 1/2;
+  grid-row: 2/5;
+}
+.four {
+  grid-column: 4/5;
+  grid-row: 1/3;
+}
+.five {
+  grid-column: 1/4;
+  grid-row: 5;
+}
+.six {
+  grid-column: 3/5;
+  grid-row: 4/6;
+}*/
